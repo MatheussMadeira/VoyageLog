@@ -1,0 +1,71 @@
+export interface Country {
+  name: string;
+  code: string; // ISO 3166-1 alpha-2
+  currency: string; // ISO 4217
+  emoji: string; // flag emoji
+}
+
+export const COUNTRIES: Country[] = [
+  { name: "Africa do Sul", code: "ZA", currency: "ZAR", emoji: "🇿🇦" },
+  { name: "Alemanha", code: "DE", currency: "EUR", emoji: "🇩🇪" },
+  { name: "Argentina", code: "AR", currency: "ARS", emoji: "🇦🇷" },
+  { name: "Austrália", code: "AU", currency: "AUD", emoji: "🇦🇺" },
+  { name: "Áustria", code: "AT", currency: "EUR", emoji: "🇦🇹" },
+  { name: "Bélgica", code: "BE", currency: "EUR", emoji: "🇧🇪" },
+  { name: "Bolivia", code: "BO", currency: "BOB", emoji: "🇧🇴" },
+  { name: "Brasil", code: "BR", currency: "BRL", emoji: "🇧🇷" },
+  { name: "Canadá", code: "CA", currency: "CAD", emoji: "🇨🇦" },
+  { name: "Chile", code: "CL", currency: "CLP", emoji: "🇨🇱" },
+  { name: "China", code: "CN", currency: "CNY", emoji: "🇨🇳" },
+  { name: "Colômbia", code: "CO", currency: "COP", emoji: "🇨🇴" },
+  { name: "Coreia do Sul", code: "KR", currency: "KRW", emoji: "🇰🇷" },
+  { name: "Costa Rica", code: "CR", currency: "CRC", emoji: "🇨🇷" },
+  { name: "Croácia", code: "HR", currency: "EUR", emoji: "🇭🇷" },
+  { name: "Dinamarca", code: "DK", currency: "DKK", emoji: "🇩🇰" },
+  { name: "Egito", code: "EG", currency: "EGP", emoji: "🇪🇬" },
+  { name: "Emirados Árabes", code: "AE", currency: "AED", emoji: "🇦🇪" },
+  { name: "Equador", code: "EC", currency: "USD", emoji: "🇪🇨" },
+  { name: "Espanha", code: "ES", currency: "EUR", emoji: "🇪🇸" },
+  { name: "Estados Unidos", code: "US", currency: "USD", emoji: "🇺🇸" },
+  { name: "Finlândia", code: "FI", currency: "EUR", emoji: "🇫🇮" },
+  { name: "França", code: "FR", currency: "EUR", emoji: "🇫🇷" },
+  { name: "Grécia", code: "GR", currency: "EUR", emoji: "🇬🇷" },
+  { name: "Guatemala", code: "GT", currency: "GTQ", emoji: "🇬🇹" },
+  { name: "Holanda", code: "NL", currency: "EUR", emoji: "🇳🇱" },
+  { name: "Hong Kong", code: "HK", currency: "HKD", emoji: "🇭🇰" },
+  { name: "Hungria", code: "HU", currency: "HUF", emoji: "🇭🇺" },
+  { name: "India", code: "IN", currency: "INR", emoji: "🇮🇳" },
+  { name: "Indonésia", code: "ID", currency: "IDR", emoji: "🇮🇩" },
+  { name: "Irlanda", code: "IE", currency: "EUR", emoji: "🇮🇪" },
+  { name: "Israel", code: "IL", currency: "ILS", emoji: "🇮🇱" },
+  { name: "Itália", code: "IT", currency: "EUR", emoji: "🇮🇹" },
+  { name: "Japão", code: "JP", currency: "JPY", emoji: "🇯🇵" },
+  { name: "Malásia", code: "MY", currency: "MYR", emoji: "🇲🇾" },
+  { name: "Marrocos", code: "MA", currency: "MAD", emoji: "🇲🇦" },
+  { name: "México", code: "MX", currency: "MXN", emoji: "🇲🇽" },
+  { name: "Noruega", code: "NO", currency: "NOK", emoji: "🇳🇴" },
+  { name: "Nova Zelândia", code: "NZ", currency: "NZD", emoji: "🇳🇿" },
+  { name: "Panamá", code: "PA", currency: "USD", emoji: "🇵🇦" },
+  { name: "Paraguai", code: "PY", currency: "PYG", emoji: "🇵🇾" },
+  { name: "Peru", code: "PE", currency: "PEN", emoji: "🇵🇪" },
+  { name: "Polônia", code: "PL", currency: "PLN", emoji: "🇵🇱" },
+  { name: "Portugal", code: "PT", currency: "EUR", emoji: "🇵🇹" },
+  { name: "Reino Unido", code: "GB", currency: "GBP", emoji: "🇬🇧" },
+  { name: "República Checa", code: "CZ", currency: "CZK", emoji: "🇨🇿" },
+  { name: "Romania", code: "RO", currency: "RON", emoji: "🇷🇴" },
+  { name: "Rússia", code: "RU", currency: "RUB", emoji: "🇷🇺" },
+  { name: "Singapura", code: "SG", currency: "SGD", emoji: "🇸🇬" },
+  { name: "Suécia", code: "SE", currency: "SEK", emoji: "🇸🇪" },
+  { name: "Suíça", code: "CH", currency: "CHF", emoji: "🇨🇭" },
+  { name: "Tailândia", code: "TH", currency: "THB", emoji: "🇹🇭" },
+  { name: "Taiwan", code: "TW", currency: "TWD", emoji: "🇹🇼" },
+  { name: "Turquia", code: "TR", currency: "TRY", emoji: "🇹🇷" },
+  { name: "Ucrânia", code: "UA", currency: "UAH", emoji: "🇺🇦" },
+  { name: "Uruguai", code: "UY", currency: "UYU", emoji: "🇺🇾" },
+  { name: "Venezuela", code: "VE", currency: "VES", emoji: "🇻🇪" },
+  { name: "Vietnam", code: "VN", currency: "VND", emoji: "🇻🇳" },
+];
+
+export function getCountryByCode(code: string): Country | undefined {
+  return COUNTRIES.find((c) => c.code === code.toUpperCase());
+}
