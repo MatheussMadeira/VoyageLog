@@ -96,7 +96,7 @@ export async function createTrip(
 
   const parsed = CreateTripSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0].message };
+    return { success: false, error: parsed.error.issues[0].message };
   }
 
   await getMongoose();

@@ -49,7 +49,7 @@ export async function createCategory(
 
   const parsed = CreateCategorySchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0].message };
+    return { success: false, error: parsed.error.issues[0].message };
   }
 
   await getMongoose();
@@ -91,7 +91,7 @@ export async function updateCategory(
 
   const parsed = UpdateCategorySchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0].message };
+    return { success: false, error: parsed.error.issues[0].message };
   }
 
   await getMongoose();

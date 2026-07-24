@@ -51,7 +51,13 @@ CategorySchema.index({ userId: 1, name: 1 }, { unique: true });
 
 // ─── Leg (embedded) ───────────────────────────────────────────────────────────
 
-const BudgetSchema = new Schema(
+export interface IBudget {
+  cash: number;
+  debit: number;
+  credit: number;
+}
+
+const BudgetSchema = new Schema<IBudget>(
   {
     cash: { type: Number, required: true, min: 0 },
     debit: { type: Number, required: true, min: 0 },
@@ -60,7 +66,18 @@ const BudgetSchema = new Schema(
   { _id: false },
 );
 
-const LegSchema = new Schema(
+export interface ILeg {
+  legId: string;
+  country: string;
+  countryCode: string;
+  city: string;
+  currency: string;
+  startDate: Date;
+  endDate: Date;
+  budget: IBudget;
+}
+
+const LegSchema = new Schema<ILeg>(
   {
     legId: { type: String, required: true },
     country: { type: String, required: true },
@@ -82,26 +99,7 @@ export interface ICategoryBudget {
   allocated: number;
 }
 
-export interface ITrip extends Document {
-  userId: mongoose.Types.ObjectId;
-  name: string;
-  referenceCurrency: string;
-  legs: Array<{
-    legId: string;
-    country: string;
-    countryCode: string;
-    city: string;
-    currency: string;
-    startDate: Date;
-    endDate: Date;
-    budget: { cash: number; debit: number; credit: number };
-  }>;
-  categoryBudgets: ICategoryBudget[];
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const CategoryBudgetSchema = new Schema(
+const CategoryBudgetSchema = new Schema<ICategoryBudget>(
   {
     categoryId: { type: String, required: true },
     categoryName: { type: String, required: true },
@@ -109,6 +107,16 @@ const CategoryBudgetSchema = new Schema(
   },
   { _id: false },
 );
+
+export interface ITrip extends Document {
+  userId: mongoose.Types.ObjectId;
+  name: string;
+  referenceCurrency: string;
+  legs: ILeg[];
+  categoryBudgets: ICategoryBudget[];
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const TripSchema = new Schema<ITrip>(
   {
@@ -180,21 +188,22 @@ RateCacheSchema.index({ fetchedAt: 1 }, { expireAfterSeconds: 43200 }); // TTL 1
 
 // ─── Model getters (HMR-safe) ─────────────────────────────────────────────────
 
-function getModel<T extends Document>(name: string, schema: Schema): Model<T> {
-  return (mongoose.models[name] as Model<T>) || mongoose.model<T>(name, schema);
-}
-
 export const getUserModel = (): Model<IUser> =>
-  getModel<IUser>("User", UserSchema);
+  (mongoose.models.User as Model<IUser>) ??
+  mongoose.model<IUser>("User", UserSchema);
 
 export const getCategoryModel = (): Model<ICategory> =>
-  getModel<ICategory>("Category", CategorySchema);
+  (mongoose.models.Category as Model<ICategory>) ??
+  mongoose.model<ICategory>("Category", CategorySchema);
 
 export const getTripModel = (): Model<ITrip> =>
-  getModel<ITrip>("Trip", TripSchema);
+  (mongoose.models.Trip as Model<ITrip>) ??
+  mongoose.model<ITrip>("Trip", TripSchema);
 
 export const getExpenseModel = (): Model<IExpense> =>
-  getModel<IExpense>("Expense", ExpenseSchema);
+  (mongoose.models.Expense as Model<IExpense>) ??
+  mongoose.model<IExpense>("Expense", ExpenseSchema);
 
 export const getRateCacheModel = (): Model<IRateCache> =>
-  getModel<IRateCache>("RateCache", RateCacheSchema);
+  (mongoose.models.RateCache as Model<IRateCache>) ??
+  mongoose.model<IRateCache>("RateCache", RateCacheSchema);

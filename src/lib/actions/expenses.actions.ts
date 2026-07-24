@@ -63,7 +63,7 @@ export async function addExpense(
 
   const parsed = ExpenseInputSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0].message };
+    return { success: false, error: parsed.error.issues[0].message };
   }
 
   await getMongoose();
@@ -154,7 +154,7 @@ export async function updateExpense(
 
   const parsed = ExpenseInputSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0].message };
+    return { success: false, error: parsed.error.issues[0].message };
   }
 
   await getMongoose();

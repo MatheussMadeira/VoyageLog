@@ -19,6 +19,7 @@ interface CategorySelectProps {
   categories: Category[];
   value: string | null;
   onChange: (id: string, name: string) => void;
+  upward?: boolean;
 }
 
 export function CategorySelect({
@@ -87,15 +88,18 @@ export function CategorySelect({
       </button>
 
       {open && (
-        <div
-          className="absolute left-0 right-0 z-[300] mt-1 rounded-xl border shadow-xl"
-          style={{
-            top: "100%",
-            backgroundColor: "oklch(0.995 0.002 90)",
-            borderColor: "oklch(0.9 0.006 90)",
-            color: "oklch(0.18 0.01 260)",
-          }}
-        >
+  <div
+    className="absolute left-0 right-0 z-[300] mt-1 rounded-xl border shadow-xl"
+    style={{
+      top: upward ? "auto" : "100%",
+      bottom: upward ? "100%" : "auto",
+      marginTop: upward ? 0 : "0.25rem",
+      marginBottom: upward ? "0.25rem" : 0,
+      backgroundColor: "oklch(0.995 0.002 90)",
+      borderColor: "oklch(0.9 0.006 90)",
+      color: "oklch(0.18 0.01 260)",
+    }}
+  >
           <div className="border-b border-[var(--color-border)] p-2">
             <input
               ref={inputRef}
